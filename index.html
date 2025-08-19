@@ -1,69 +1,81 @@
-<!doctype html>
-<html lang="fr" data-theme="dark">
+<!doctype html><html lang="fr" data-theme="dark">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Sentinel Quantum Vanguard AI Pro</title>
   <link rel="stylesheet" href="style.css"/>
-  <link rel="preload" href="shield.svg" as="image">
+  <meta name="theme-color" content="#0a1222"/>
 </head>
 <body>
-<header class="topbar container">
-  <div class="brand"><img class="ps" alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='42' height='42'><text x='0' y='32' font-size='32' fill='%23a7b4ff'>PS</text></svg>"><span>Sentinel</span> <em>Quantum Vanguard</em> <b>AI Pro</b></div>
-  <div class="actions">
-    <button id="themeBtn" class="btn ghost" title="Thème">🌗</button>
-    <span id="clock" class="muted"></span>
-  </div>
-</header>
-
-<main class="container layout">
-  <section class="canvas">
-    <div class="shield">
-      <img src="shield.svg" alt="Bouclier">
-      <i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i>
+  <header class="topbar _container">
+    <div class="ps5">PS5</div>
+    <div class="brand"><span class="b-ic">🛡️</span><b>Sentinel</b> Quantum Vanguard <span class="tag">AI Pro</span></div>
+    <div class="actions">
+      <button id="themeBtn" class="btn ghost" title="Basculer le thème">🌗</button>
+      <span id="clock" class="hint"></span>
     </div>
-    <div class="scoreCard">
-      <div class="scoreRing" id="ringScore">96</div>
-      <div class="bar"><i id="scoreBar" style="width:82%"></i></div>
-      <div class="tagline">SECURITY SCORE</div>
-    </div>
-  </section>
+  </header>
 
-  <section class="modules">
-    <h2 class="h2">Modules actifs</h2>
-    <div class="grid">
-      <a class="tile" data-ic="🧠" id="m_cog">Cognitive Firewall</a>
-      <a class="tile" data-ic="🛰️" id="m_osint">OSINT Intelligence</a>
-      <a class="tile" data-ic="🔐">Confidentialité renforcée</a>
-      <a class="tile" data-ic="🧩">Pare-feu visuel</a>
-      <a class="tile" data-ic="🛠️">Réponse Incident</a>
-      <a class="tile" data-ic="🕵️">Détection APT / Pegasus</a>
-      <a class="tile" data-ic="📡" id="m_net">Garde Réseau</a>
-      <a class="tile" data-ic="🔄">Mise à jour automatique</a>
-      <a class="tile" data-ic="🎯">Quantum Protector</a>
-      <a class="tile" data-ic="🗄️">Coffre-fort de confidentialité</a>
-      <a class="tile" data-ic="🎛️">Lanceur principal sécurisé</a>
-      <a class="tile" data-ic="📊">Journal IA en temps réel</a>
-    </div>
-  </section>
+  <main class="_container shell">
+    <!-- Héro : blason + anneaux -->
+    <section class="hero">
+      <div class="shield">
+        <div class="ring ring1"></div><div class="ring ring2"></div><div class="ring ring3"></div>
+        <div class="core"></div>
+      </div>
+      <div class="hero-text">
+        <h1>Sentinel Quantum Vanguard AI Pro</h1>
+        <p class="sub">Protection proactive • Intelligence extrême • Résilience totale.</p>
+      </div>
+    </section>
 
-  <aside class="newsWrap">
-    <h2 class="h2">Actualité Cyber & Modules IA</h2>
-    <ul class="news" id="newsList"></ul>
-  </aside>
-</main>
+    <!-- Grille des modules -->
+    <section class="grid modules">
+      <a class="card" id="btnCF"      data-ic="🧠">Cognitive Firewall</a>
+      <a class="card" id="btnOSINT"   data-ic="🛰️">OSINT Intelligence</a>
+      <a class="card" id="btnPrivacy" data-ic="🔐">Confidentialité Renforcée</a>
+      <a class="card" id="btnVisualFW"data-ic="🧩">Pare-feu Visuel</a>
+      <a class="card" id="btnIR"      data-ic="🛠️">Réponse Incident</a>
+      <a class="card" id="btnAPT"     data-ic="🕵️">Détection APT / Pegasus</a>
+      <a class="card" id="btnNetGuard"data-ic="📡">Garde Réseau</a>
+      <a class="card" id="btnAuto"    data-ic="🔄">Mise à jour Automatique</a>
+      <a class="card" id="btnQP"      data-ic="🎯">Quantum Protector</a>
+      <a class="card" id="btnVault"   data-ic="🗄️">Coffre-fort de confidentialité</a>
+      <a class="card" id="btnLauncher"data-ic="🎛️">Lanceur principal sécurisé</a>
+      <a class="card" id="btnLog"     data-ic="📊">Journal IA en temps réel</a>
+    </section>
 
-<footer class="dock container">
-  <div class="slogan">Protection proactive. Intelligence extrême. Résilience totale.</div>
-  <div class="dockBtns">
-    <button class="dock-btn">🏠</button>
-    <button class="dock-btn">🔎</button>
-    <button class="dock-btn">⚠️</button>
-    <button class="dock-btn">📈</button>
-    <button class="dock-btn">👤</button>
-  </div>
-</footer>
+    <!-- Panneaux : news + score + outils démo -->
+    <section class="panels">
+      <article class="panel">
+        <div class="panel-title">Actualité Cyber & Modules IA</div>
+        <ul id="newsList" class="news"></ul>
+      </article>
 
-<script type="module" src="main.js"></script>
-</body>
-</html>
+      <article class="panel compact">
+        <div class="panel-title">Security score</div>
+        <div class="donut"><span id="scoreNum">96</span></div>
+        <div class="bar"><i id="scoreBar" style="width:82%"></i></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-title">Outils (démos branchées)</div>
+        <div class="tools">
+          <div class="row">
+            <button id="btnIP">IP publique</button>
+            <input id="domainInput" placeholder="ex: cloudflare.com"/>
+            <button id="btnDNS">DNS Cloudflare</button>
+            <button id="btnPing">Latence 1.1.1.1</button>
+            <button id="btnFP">Fingerprint</button>
+          </div>
+          <pre id="toolOut" class="out"></pre>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="_container footer">
+    <span class="tagline">Protection proactive. Intelligence extrême. Résilience totale.</span>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body></html>

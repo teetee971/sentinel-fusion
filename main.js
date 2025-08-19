@@ -1,88 +1,49 @@
-const THEME_KEY="sentinel-theme";
-const body=document.documentElement;
-
-// Theme boot
-(function bootTheme(){
-  const t = localStorage.getItem(THEME_KEY) || "dark";
-  body.setAttribute("data-theme", t);
-})();
-
-document.getElementById("themeBtn")?.addEventListener("click", ()=>{
-  const next = body.getAttribute("data-theme")==="dark" ? "light" : "dark";
-  body.setAttribute("data-theme", next);
-  localStorage.setItem(THEME_KEY, next);
-});
-
-// Horloge
-(function tick(){
-  const el=document.getElementById("clock");
-  if(el){ el.textContent=new Date().toLocaleString("fr-FR",{weekday:"long", day:"2-digit", month:"long", hour:"2-digit", minute:"2-digit"}); }
-  setTimeout(tick, 30_000);
-})();
-
-// Score (démo + anneau)
-(function score(){
-  const s = 82 + Math.floor(Math.random()*10);
-  const ring=document.getElementById("ringScore"); const bar=document.getElementById("scoreBar");
-  if(ring){ ring.style.setProperty("--p", s); ring.textContent = String(s); }
-  if(bar) bar.style.width = s+"%";
-})();
-
-// Mini-modules utilisables
-const modules = {
-  // OSINT: utilisation d’un “read-proxy” public (CORS OK) pour parser de 2 sources
-  osint: async function(){
-    const sources = [
-      "https://r.jina.ai/http://feeds.feedburner.com/TheHackersNews",
-      "https://r.jina.ai/http://www.cert.ssi.gouv.fr/alerte/"
-    ];
-    const news=[];
-    for(const url of sources){
-      try{
-        const t = await fetch(url).then(r=>r.text());
-        // extraction rapide de titres (best-effort)
-        (t.match(/<title[^>]*>(.*?)<\/title>/gi)||[]).slice(1,6).forEach(x=>{
-          news.push({t:x.replace(/<[^>]+>/g,"").trim(), m:"source: "+(url.includes("cert")?"CERT-FR":"THN")});
-        });
-      }catch(e){}
-    }
-    const ul=document.getElementById("newsList"); if(!ul) return;
-    ul.innerHTML="";
-    news.slice(0,6).forEach(n=>{
-      const li=document.createElement("li");
-      li.innerHTML = `<div class="t">🔹 ${n.t}</div><div class="m">${n.m}</div>`;
-      ul.appendChild(li);
-    });
-  },
-
-  // Réseau: test IP publique + latence HTTP vers Cloudflare
-  net: async function(){
-    let ip="?", ms="?";
-    try{
-      ip = await fetch("https://api.ipify.org?format=json").then(r=>r.json()).then(j=>j.ip);
-    }catch(e){}
-    try{
-      const t0=performance.now();
-      await fetch("https://www.cloudflare.com/cdn-cgi/trace", {mode:"cors"});
-      ms = Math.round(performance.now()-t0);
-    }catch(e){}
-    alert(`IP publique: ${ip}\nLatence (HTTP): ${ms} ms`);
-  },
-
-  // Cognitive firewall (démo UI rapide)
-  cog: function(){
-    alert("Analyse en cours (démo)…\nProfil recommandé : Premium IA+ (détection proactive + Quantum Shield)");
-  }
-};
-
-document.getElementById("m_osint")?.addEventListener("click", modules.osint);
-document.getElementById("m_net")?.addEventListener("click", modules.net);
-document.getElementById("m_cog")?.addEventListener("click", modules.cog);
-
-// Workbox-like cache très simple (offline demo)
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
+export function toast(msg){
+  const t=document.createElement('div');
+  t.className='toast';
+  t.textContent=msg;
+  Object.assign(t.style,{position:'fixed',bottom:'20px',left:'50%',transform:'translateX(-50%)',
+    background:'rgba(15,25,50,.85)',border:'1px solid rgba(130,170,210,.35)',padding:'10px 12px',
+    borderRadius:'10px',backdropFilter:'blur(8px)',zIndex:9999});
+  document.body.appendChild(t); setTimeout(()=>t.remove(),1800);
 }
 
-// Premier chargement du flux
-modules.osint();
+const THEME_KEY='sentinel-theme', body=document.body;
+// boot thème
+(function(){
+  const t=localStorage.getItem(THEME_KEY)||'dark';
+  body.setAttribute('data-theme',t);
+})();
+document.getElementById('themeBtn')?.addEventListener('click',()=>{
+  const next=body.getAttribute('data-theme')==='dark'?'light':'dark';
+  body.setAttribute('data-theme',next); localStorage.setItem(THEME_KEY,next);
+});
+
+// horloge
+(function tick(){
+  const el=document.getElementById('clock');
+  if(el) el.textContent=new Date().toLocaleString('fr-FR',{weekday:'long',day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit'});
+  setTimeout(tick,30000);
+})();
+
+// score (démo)
+(function score(){
+  const s=92+Math.floor(Math.random()*6);
+  const n=document.getElementById('scoreNum'); const b=document.getElementById('scoreBar');
+  if(n) n.textContent=String(s); if(b) b.style.width=s+'%';
+})();
+
+// actus (démo statique)
+const feed=[
+ {t:"Nouvelle attaque Zero-Day détectée (CVE-2025-5433) ciblant routeurs TP-Link", m:"Vulnérabilités · CERT EU · 5 min"},
+ {t:"Propagande IA détectée sur réseaux sociaux en Europe de l’Est", m:"VPN · Cloudflare Radar · 1 h"},
+ {t:"Restrictions VPN en Iran : hausse de la censure Internet", m:"IA · The Hacker News · 9 h"},
+ {t:"Ransomware ciblant 4200 hôpitaux aux États-Unis", m:"IA · The Hacker News · 9 h"}
+];
+(function news(){
+  const ul=document.getElementById('newsList'); if(!ul) return;
+  feed.forEach(n=>{ const li=document.createElement('li'); li.innerHTML=`<div class="t">• ${n.t}</div><div class="m">${n.m}</div>`; ul.appendChild(li); });
+})();
+
+// charge les modules (liaisons boutons + outils)
+import './modules.js';
