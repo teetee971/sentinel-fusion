@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+API="https://api.cloudflare.com/client/v4"
+
+# --- HTTP helpers ---
+http_code(){ curl -sS -o /dev/null -w "%{http_code}" "$@"; }
+get_json(){ curl -fsS "$@"; }
+
+# Récupère le dernier déploiement (200 ou "aucun")
+last_deploy(){
+  local pn="$1" dep st url
+  dep="$(get_json -H "Authorization: Bearer $CF_API_TOKEN" \
+        "$API/accounts/$ACCOUNT_ID/pages/projects/$pn/deployments?order=desc&per_page=1" \
+        2>/dev/null || true)"
+  st="$(jq -r 'first(.result[]?)?.latest_stage.status // "unknown"' <<<"$dep")"
+  url="$(jq -r 'first(.result[]?)?.deployment_url // (first(.result[]?)?.urls[0] // "n/a")' <<<"$dep")"
+  echo "status=$st url=$url"
+  [[ "$st" == "success" ]] && return 0 || return 1
+}
+
+print_status(){
+  local pn="$1"; echo "→ Projet: $pn"
+  if last_deploy "$pn"; then echo "✅ Déploiement terminé."; else echo "ℹ️  Aucun déploiement (encore)."; fi
+}
+
+watch_loop(){
+  local pn="$1" st url dep
+  echo "Suivi du projet $pn (Ctrl-C pour arrêter)…"
+  while :; do
+    dep="$(get_json -H "Authorization: Bearer $CF_API_TOKEN" \
+          "$API/accounts/$ACCOUNT_ID/pages/projects/$pn/deployments?order=desc&per_page=1" 2>/dev/null || true)"
+    st="$(jq -r 'first(.result[]?)?.latest_stage.status // "unknown"' <<<"$dep")"
+    url="$(jq -r 'first(.result[]?)?.deployment_url // (first(.result[]?)?.urls[0] // "n/a")' <<<"$dep")"
+    printf "%s status=%s url=%s\n" "$(date +%H:%M:%S)" "$st" "$url"
+    case "$st" in success) echo "✅ Déploiement terminé."; exit 0 ;;
+      failure|canceled) echo "❌ Terminé avec état: $st"; exit 1 ;; esac
+    sleep 5
+  done
+}
+
+# ===== main =====
+MODE="${MODE-status}"; PN_IN="${1:-$PROJECT_NAME}"
+while (($#)); do
+  case "$1" in -p|--project) PN_IN="$2"; shift 2 ;;
+    --status) MODE="status"; shift ;;
+    --watch)  MODE="watch";  shift ;;
+    *) shift ;; esac
+done
+
+# Vérif accès & slug exact
+code=$(http_code -H "Authorization: Bearer $CF_API_TOKEN" "$API/user/tokens/verify" || echo 000)
+[[ "$code" == 200 ]] || { echo "❌ Token invalide (CF_API_TOKEN)."; exit 1; }
+
+json="$(get_json -H "Authorization: Bearer $CF_API_TOKEN" "$API/accounts/$ACCOUNT_ID/pages/projects")"
+pn_exact="$(jq -r --arg n "$PN_IN" '.result[]?.name | select(type=="string")
+         | (ascii_downcase as $s | if ($s==($n|ascii_downcase)) or ($s|startswith($n|ascii_downcase)) then . else empty end)' <<<"$json" | head -n1)"
+[[ -n "$pn_exact" ]] || { echo "❌ Projet introuvable: $PN_IN"; jq -r '.result[]?.name' <<<"$json"; exit 1; }
+
+case "$MODE" in
+  status) print_status "$pn_exact" ;;
+  watch)  watch_loop   "$pn_exact" ;;
+  *) echo "Usage: cfp [--status|--watch] [-p NAME]"; exit 0 ;;
+esac

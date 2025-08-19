@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+ENV="$HOME/.cfpages.env"; set -a; . "$ENV"; set +a
+curl -sS -X POST -o /dev/null -w 'hook_post=%{http_code}\n' "$DEPLOY_HOOK_URL"
+exec cfp --watch

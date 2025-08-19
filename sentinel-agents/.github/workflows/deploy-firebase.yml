@@ -1,0 +1,36 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install deps
+        run: npm ci --omit=dev || npm i
+
+      - name: Build (vite)
+        run: |
+          if [ -f package.json ] && jq -e '.scripts.build!=null' package.json >/dev/null 2>&1; then
+            npm run build
+          else
+            npx vite build
+          fi
+
+      - name: Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          channelId: live
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}

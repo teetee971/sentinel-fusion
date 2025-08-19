@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ENV="$HOME/.cfpages.env"
+[[ -f "$ENV" ]] || { echo "Env manquant: $ENV"; exit 1; }
+set -a; . "$ENV"; set +a
+
+API="https://api.cloudflare.com/client/v4"
+AUTH=(-H "Authorization: Bearer $CF_API_TOKEN")
+
+usage(){ echo "Usage: cfp [--status|--watch|--urls|--deploy|--open]"; exit 1; }
+
+status_fn(){
+  out=$(curl -sS "${AUTH[@]}" \
+    "$API/accounts/$ACCOUNT_ID/pages/projects/$PROJECT_NAME/deployments?order=desc&per_page=1")
+  jq -r 'first(.result[]?) | "status="+(.latest_stage.status)+" url="+(.url // "n/a")' <<<"$out"
+}
+
+watch_fn(){
+  echo "Suivi du projet $PROJECT_NAME (Ctrl-C pour arrêter)…"
+  while :; do
+    out=$(curl -sS "${AUTH[@]}" \
+      "$API/accounts/$ACCOUNT_ID/pages/projects/$PROJECT_NAME/deployments?order=desc&per_page=1")
+    st=$(jq -r 'first(.result[]?)?.latest_stage.status // "unknown"' <<<"$out")
+    url=$(jq -r 'first(.result[]?)?.url // "n/a"' <<<"$out")
+    printf "%s status=%s url=%s\n" "$(date +'%H:%M:%S')" "$st" "$url"
+    case "$st" in
+      success) echo "✅ Déploiement terminé."; exit 0;;
+      failure|canceled) echo "❌ Terminé avec état: $st"; exit 1;;
+    esac
+    sleep 5
+  done
+}
+
+urls_fn(){
+  # 1) domaine par défaut (*.pages.dev)
+  proj=$(curl -sS "${AUTH[@]}" \
+         "$API/accounts/$ACCOUNT_ID/pages/projects/$PROJECT_NAME")
+  sub=$(jq -r '.result.subdomain // empty' <<<"$proj")
+  [[ -n "$sub" ]] && echo "default=https://$sub" || echo "default=none"
+
+  # 2) domaines customs -> toujours une liste de chaînes
+  customs_json=$(curl -sS "${AUTH[@]}" \
+    "$API/accounts/$ACCOUNT_ID/pages/projects/$PROJECT_NAME/custom_domains")
+  customs_list=$(jq -r '
+      (.result // [])
+      | map( if type=="object" then (.hostname // .domain // .) else tostring end )
+      | join(",")
+  ' <<<"$customs_json")
+  [[ -n "$customs_list" ]] && echo "customs=$customs_list" || echo "customs=none"
+
+  # 3) dernier déploiement (id, statut, url, 1er alias)
+  dep_json=$(curl -sS "${AUTH[@]}" \
+    "$API/accounts/$ACCOUNT_ID/pages/projects/$PROJECT_NAME/deployments?order=desc&per_page=1")
+  read -r dep_id dep_status dep_url dep_alias < <(
+    jq -r 'first(.result[]?)
+           | [.id, .latest_stage.status, (.url // "n/a"), (.aliases[0]? // "none")]
+           | @tsv' <<<"$dep_json"
+  )
+  echo "deploy_id=$dep_id"
+  echo "status=$dep_status"
+  echo "url=$dep_url"
+  echo "alias=$dep_alias"
+}
+
+deploy_fn(){
+  [[ -n "${DEPLOY_HOOK_URL:-}" ]] || { echo "DEPLOY_HOOK_URL manquant dans $ENV"; exit 1; }
+  curl -sS -X POST -o /dev/null -w 'hook_post=%{http_code}\n' "$DEPLOY_HOOK_URL"
+  exec "$0" --watch
+}
+
+open_fn(){
+  out=$(curl -sS "${AUTH[@]}" \
+    "$API/accounts/$ACCOUNT_ID/pages/projects/$PROJECT_NAME/deployments?order=desc&per_page=1")
+  url=$(jq -r 'first(.result[]?)?.url // empty' <<<"$out")
+  [[ -z "$url" ]] && { echo "Pas d'URL trouvée."; exit 1; }
+  if command -v termux-open-url >/dev/null 2>&1; then termux-open-url "$url";
+  elif command -v xdg-open >/dev/null 2>&1; then xdg-open "$url" >/dev/null 2>&1 || true;
+  else echo "Dernier déploiement : $url"; fi
+}
+
+case "${1:-}" in
+  --status)  status_fn;;
+  --watch)   watch_fn;;
+  --urls)    urls_fn;;
+  --deploy)  deploy_fn;;
+  --open)    open_fn;;
+  *)         usage;;
+esac

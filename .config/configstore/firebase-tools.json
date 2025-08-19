@@ -1,0 +1,48 @@
+{
+	"motd": {
+		"cloudBuildErrorAfter": 1594252800000,
+		"cloudBuildWarnAfter": 1590019200000,
+		"defaultNode10After": 1594252800000,
+		"minVersion": "3.0.5",
+		"node8DeploysDisabledAfter": 1613390400000,
+		"node8RuntimeDisabledAfter": 1615809600000,
+		"node8WarnAfter": 1600128000000,
+		"fetched": 1754932351641
+	},
+	"user": {
+		"iss": "accounts.google.com",
+		"azp": "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+		"aud": "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+		"sub": "111315427535515739595",
+		"email": "thierrynaud2009@gmail.com",
+		"email_verified": true,
+		"at_hash": "gEtW8ez-ziPOCWGRi7K6Lg",
+		"iat": 1754932449,
+		"exp": 1754936049
+	},
+	"tokens": {
+		"expires_at": 1754940731189,
+		"refresh_token": "1//030uX1eSD-IYiCgYIARAAGAMSNwF-L9IrsO88FZDw8iDSsXJ7fEjGVaemrOAWiyKAnlFR4HeqP2iuxiS79Ss3nOD8WnJ67vFz9qA",
+		"scopes": [],
+		"access_token": "ya29.a0AS3H6Ny9VOG54jw9LgWspreh_jy3lGOZLke-FNQAyzC7t0-8dc9NVrlO1ulkuN3O85hPyVDHQOFvT12nxQMMJlpdB1IKs7G7XKi5B-wAycNSAbqL-yuOBv-6a7el2KPiBbRdxpMUHcJMS-bYwwol8mWTMR_PSJkozdReAz-Uap8-TQaCgYKAVUSARYSFQHGX2Mi33bouMldO1qR-SedXYi6kw0181",
+		"expires_in": 3599,
+		"scope": "https://www.googleapis.com/auth/cloud-platform openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/firebase https://www.googleapis.com/auth/cloudplatformprojects.readonly",
+		"token_type": "Bearer",
+		"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJhNjNiNDM2ODM2YTkzOWI3OTViNDEyMmQzZjRkMGQyMjVkMWM3MDAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNTYzNTg0MzM1ODY5LWZncmhnbWQ0N2JxbmVraWo1aThiNXByMDNobzg0OWU2LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNTYzNTg0MzM1ODY5LWZncmhnbWQ0N2JxbmVraWo1aThiNXByMDNobzg0OWU2LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTExMzE1NDI3NTM1NTE1NzM5NTk1IiwiZW1haWwiOiJ0aGllcnJ5bmF1ZDIwMDlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJkZ2RPTTNzQTdzOGJGbWtnMWN2UnJRIiwiaWF0IjoxNzU0OTM3MTMyLCJleHAiOjE3NTQ5NDA3MzJ9.mqtayQhQdeMJdCBMTkIypk5wrQFJF6LVS_zxY6YAj3VzLTMvqoWnXrSguaVGWN1v26jPhqYOXIlkhLrG51si-YlAmXJHQYRuXIu-5i7PR1xBsJDMvajFcIH5U-UlEfEsy5rYySCFy4aiMsf27FExbJQNps2w080OHvQJCC2zht2ar-8OXuHUGk6t5yKmiDdVIBYoaae_JoFbkGxwL8k49X3134_VFtL2nQoxavvKxbBv4PvRwzqd7HYygJK9vyYkBlhJtL_Pfyh98In35GtkxA3UplYBtMbwtCd-EBdLerdjIFX-Bo1da7RFMXIXzoaPx_merOw0LU9wxqne2RZk_Q"
+	},
+	"loginScopes": [
+		"email",
+		"openid",
+		"https://www.googleapis.com/auth/cloudplatformprojects.readonly",
+		"https://www.googleapis.com/auth/firebase",
+		"https://www.googleapis.com/auth/cloud-platform"
+	],
+	"apiEnablementCache": {
+		"sentinel-vanguard-ai-pro": {
+			"cloudresourcemanager.googleapis.com": true
+		}
+	},
+	"activeProjects": {
+		"/data/data/com.termux/files/home/SentinelQuantumVanguardAiPro": "sentinel-vanguard-ai-pro"
+	}
+}

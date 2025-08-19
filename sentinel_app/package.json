@@ -1,0 +1,10 @@
+{
+  "name": "sentinel-quantum-vanguard-ai-pro",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort"
+  },
+  "devDependencies": { "vite": "^5.4.0" }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "sentinel-agents",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node orchestrator.js",
+    "monitor": "node agents/monitor.js",
+    "deploy": "node agents/deploy.js",
+    "fix": "node agents/fix.js",
+    "ui": "node agents/ui.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "vite": "^7.1.3"
+  }
+}

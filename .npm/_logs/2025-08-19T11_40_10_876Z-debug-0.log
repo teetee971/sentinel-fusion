@@ -1,0 +1,347 @@
+0 verbose cli /data/data/com.termux/files/usr/bin/node /data/data/com.termux/files/usr/bin/npm
+1 info using npm@10.9.3
+2 info using node@v22.18.0
+3 silly config load:file:/data/data/com.termux/files/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/data/com.termux/files/home/sentinel_app/.npmrc
+5 silly config load:file:/data/data/com.termux/files/home/.npmrc
+6 silly config load:file:/data/data/com.termux/files/usr/etc/npmrc
+7 verbose title npm i vite
+8 verbose argv "i" "--save-dev" "vite"
+9 verbose logfile logs-max:10 dir:/data/data/com.termux/files/home/.npm/_logs/2025-08-19T11_40_10_876Z-
+10 verbose logfile /data/data/com.termux/files/home/.npm/_logs/2025-08-19T11_40_10_876Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:1098907648 maxSize:274726912 maxEntrySize:137363456
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest vite@^5.4.19
+16 silly packumentCache full:https://registry.npmjs.org/vite cache-miss
+17 http cache https://registry.npmjs.org/vite 73ms (cache hit)
+18 silly packumentCache full:https://registry.npmjs.org/vite set size:38490056 disposed:false
+19 silly fetch manifest @types/node@^18.0.0 || >=20.0.0
+20 silly packumentCache full:https://registry.npmjs.org/@types%2fnode cache-miss
+21 http cache https://registry.npmjs.org/@types%2fnode 24ms (cache hit)
+22 silly packumentCache full:https://registry.npmjs.org/@types%2fnode set size:10491171 disposed:false
+23 silly fetch manifest less@*
+24 silly packumentCache full:https://registry.npmjs.org/less cache-miss
+25 http cache https://registry.npmjs.org/less 5ms (cache hit)
+26 silly packumentCache full:https://registry.npmjs.org/less set size:421902 disposed:false
+27 silly fetch manifest lightningcss@^1.21.0
+28 silly packumentCache full:https://registry.npmjs.org/lightningcss cache-miss
+29 http cache https://registry.npmjs.org/lightningcss 4ms (cache hit)
+30 silly packumentCache full:https://registry.npmjs.org/lightningcss set size:169503 disposed:false
+31 silly fetch manifest sass@*
+32 silly packumentCache full:https://registry.npmjs.org/sass cache-miss
+33 http cache https://registry.npmjs.org/sass 3ms (cache hit)
+34 silly packumentCache full:https://registry.npmjs.org/sass set size:685795 disposed:false
+35 silly fetch manifest sass-embedded@*
+36 silly packumentCache full:https://registry.npmjs.org/sass-embedded cache-miss
+37 http cache https://registry.npmjs.org/sass-embedded 3ms (cache hit)
+38 silly packumentCache full:https://registry.npmjs.org/sass-embedded set size:356699 disposed:false
+39 silly fetch manifest stylus@*
+40 silly packumentCache full:https://registry.npmjs.org/stylus cache-miss
+41 http cache https://registry.npmjs.org/stylus 6ms (cache hit)
+42 silly packumentCache full:https://registry.npmjs.org/stylus set size:286766 disposed:false
+43 silly fetch manifest sugarss@*
+44 silly packumentCache full:https://registry.npmjs.org/sugarss cache-miss
+45 http cache https://registry.npmjs.org/sugarss 2ms (cache hit)
+46 silly packumentCache full:https://registry.npmjs.org/sugarss set size:44975 disposed:false
+47 silly fetch manifest postcss@^8.3.3
+48 silly packumentCache full:https://registry.npmjs.org/postcss cache-miss
+49 http cache https://registry.npmjs.org/postcss 6ms (cache hit)
+50 silly packumentCache full:https://registry.npmjs.org/postcss set size:696262 disposed:false
+51 silly fetch manifest terser@^5.4.0
+52 silly packumentCache full:https://registry.npmjs.org/terser cache-miss
+53 http cache https://registry.npmjs.org/terser 9ms (cache hit)
+54 silly packumentCache full:https://registry.npmjs.org/terser set size:773562 disposed:false
+55 silly placeDep ROOT vite@5.4.19 REPLACE for:  want: ^5.4.19
+56 silly reify moves {}
+57 silly audit bulk request {
+57 silly audit   '@esbuild/aix-ppc64': [ '0.21.5' ],
+57 silly audit   '@esbuild/android-arm': [ '0.21.5' ],
+57 silly audit   '@esbuild/android-arm64': [ '0.21.5' ],
+57 silly audit   '@esbuild/android-x64': [ '0.21.5' ],
+57 silly audit   '@esbuild/darwin-arm64': [ '0.21.5' ],
+57 silly audit   '@esbuild/darwin-x64': [ '0.21.5' ],
+57 silly audit   '@esbuild/freebsd-arm64': [ '0.21.5' ],
+57 silly audit   '@esbuild/freebsd-x64': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-arm': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-arm64': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-ia32': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-loong64': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-mips64el': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-ppc64': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-riscv64': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-s390x': [ '0.21.5' ],
+57 silly audit   '@esbuild/linux-x64': [ '0.21.5' ],
+57 silly audit   '@esbuild/netbsd-x64': [ '0.21.5' ],
+57 silly audit   '@esbuild/openbsd-x64': [ '0.21.5' ],
+57 silly audit   '@esbuild/sunos-x64': [ '0.21.5' ],
+57 silly audit   '@esbuild/win32-arm64': [ '0.21.5' ],
+57 silly audit   '@esbuild/win32-ia32': [ '0.21.5' ],
+57 silly audit   '@esbuild/win32-x64': [ '0.21.5' ],
+57 silly audit   '@rollup/rollup-android-arm-eabi': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-android-arm64': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-darwin-arm64': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-darwin-x64': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-freebsd-arm64': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-freebsd-x64': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-arm-gnueabihf': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-arm-musleabihf': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-arm64-gnu': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-arm64-musl': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-loongarch64-gnu': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-ppc64-gnu': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-riscv64-gnu': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-riscv64-musl': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-s390x-gnu': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-x64-gnu': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-linux-x64-musl': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-win32-arm64-msvc': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-win32-ia32-msvc': [ '4.46.2' ],
+57 silly audit   '@rollup/rollup-win32-x64-msvc': [ '4.46.2' ],
+57 silly audit   '@types/estree': [ '1.0.8' ],
+57 silly audit   esbuild: [ '0.21.5' ],
+57 silly audit   fsevents: [ '2.3.3' ],
+57 silly audit   nanoid: [ '3.3.11' ],
+57 silly audit   picocolors: [ '1.1.1' ],
+57 silly audit   postcss: [ '8.5.6' ],
+57 silly audit   rollup: [ '4.46.2' ],
+57 silly audit   'source-map-js': [ '1.2.1' ],
+57 silly audit   vite: [ '5.4.19' ]
+57 silly audit }
+58 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/fsevents
+59 silly reify mark deleted [
+59 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/fsevents'
+59 silly reify ]
+60 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-win32-x64-msvc
+61 silly reify mark deleted [
+61 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-win32-x64-msvc'
+61 silly reify ]
+62 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-win32-ia32-msvc
+63 silly reify mark deleted [
+63 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-win32-ia32-msvc'
+63 silly reify ]
+64 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-win32-arm64-msvc
+65 silly reify mark deleted [
+65 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-win32-arm64-msvc'
+65 silly reify ]
+66 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-x64-musl
+67 silly reify mark deleted [
+67 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-x64-musl'
+67 silly reify ]
+68 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-x64-gnu
+69 silly reify mark deleted [
+69 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-x64-gnu'
+69 silly reify ]
+70 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-s390x-gnu
+71 silly reify mark deleted [
+71 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-s390x-gnu'
+71 silly reify ]
+72 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-riscv64-musl
+73 silly reify mark deleted [
+73 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-riscv64-musl'
+73 silly reify ]
+74 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-riscv64-gnu
+75 silly reify mark deleted [
+75 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-riscv64-gnu'
+75 silly reify ]
+76 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-ppc64-gnu
+77 silly reify mark deleted [
+77 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-ppc64-gnu'
+77 silly reify ]
+78 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-loongarch64-gnu
+79 silly reify mark deleted [
+79 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-loongarch64-gnu'
+79 silly reify ]
+80 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-arm64-musl
+81 silly reify mark deleted [
+81 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-arm64-musl'
+81 silly reify ]
+82 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-arm64-gnu
+83 silly reify mark deleted [
+83 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-arm64-gnu'
+83 silly reify ]
+84 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-arm-musleabihf
+85 silly reify mark deleted [
+85 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-arm-musleabihf'
+85 silly reify ]
+86 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-arm-gnueabihf
+87 silly reify mark deleted [
+87 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-linux-arm-gnueabihf'
+87 silly reify ]
+88 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-freebsd-x64
+89 silly reify mark deleted [
+89 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-freebsd-x64'
+89 silly reify ]
+90 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-freebsd-arm64
+91 silly reify mark deleted [
+91 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-freebsd-arm64'
+91 silly reify ]
+92 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-darwin-x64
+93 silly reify mark deleted [
+93 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-darwin-x64'
+93 silly reify ]
+94 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-darwin-arm64
+95 silly reify mark deleted [
+95 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-darwin-arm64'
+95 silly reify ]
+96 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-android-arm-eabi
+97 silly reify mark deleted [
+97 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@rollup/rollup-android-arm-eabi'
+97 silly reify ]
+98 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/win32-x64
+99 silly reify mark deleted [
+99 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/win32-x64'
+99 silly reify ]
+100 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/win32-ia32
+101 silly reify mark deleted [
+101 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/win32-ia32'
+101 silly reify ]
+102 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/win32-arm64
+103 silly reify mark deleted [
+103 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/win32-arm64'
+103 silly reify ]
+104 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/sunos-x64
+105 silly reify mark deleted [
+105 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/sunos-x64'
+105 silly reify ]
+106 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/openbsd-x64
+107 silly reify mark deleted [
+107 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/openbsd-x64'
+107 silly reify ]
+108 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/netbsd-x64
+109 silly reify mark deleted [
+109 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/netbsd-x64'
+109 silly reify ]
+110 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-x64
+111 silly reify mark deleted [
+111 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-x64'
+111 silly reify ]
+112 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-s390x
+113 silly reify mark deleted [
+113 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-s390x'
+113 silly reify ]
+114 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-riscv64
+115 silly reify mark deleted [
+115 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-riscv64'
+115 silly reify ]
+116 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-ppc64
+117 silly reify mark deleted [
+117 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-ppc64'
+117 silly reify ]
+118 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-mips64el
+119 silly reify mark deleted [
+119 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-mips64el'
+119 silly reify ]
+120 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-loong64
+121 silly reify mark deleted [
+121 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-loong64'
+121 silly reify ]
+122 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-ia32
+123 silly reify mark deleted [
+123 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-ia32'
+123 silly reify ]
+124 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-arm64
+125 silly reify mark deleted [
+125 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-arm64'
+125 silly reify ]
+126 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-arm
+127 silly reify mark deleted [
+127 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/linux-arm'
+127 silly reify ]
+128 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/freebsd-x64
+129 silly reify mark deleted [
+129 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/freebsd-x64'
+129 silly reify ]
+130 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/freebsd-arm64
+131 silly reify mark deleted [
+131 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/freebsd-arm64'
+131 silly reify ]
+132 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/darwin-x64
+133 silly reify mark deleted [
+133 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/darwin-x64'
+133 silly reify ]
+134 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/darwin-arm64
+135 silly reify mark deleted [
+135 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/darwin-arm64'
+135 silly reify ]
+136 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/android-x64
+137 silly reify mark deleted [
+137 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/android-x64'
+137 silly reify ]
+138 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/android-arm
+139 silly reify mark deleted [
+139 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/android-arm'
+139 silly reify ]
+140 verbose reify failed optional dependency /data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/aix-ppc64
+141 silly reify mark deleted [
+141 silly reify   '/data/data/com.termux/files/home/sentinel_app/node_modules/@esbuild/aix-ppc64'
+141 silly reify ]
+142 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 582ms
+143 silly audit report {
+143 silly audit report   esbuild: [
+143 silly audit report     {
+143 silly audit report       id: 1102341,
+143 silly audit report       url: 'https://github.com/advisories/GHSA-67mh-4wv8-2f99',
+143 silly audit report       title: 'esbuild enables any website to send any requests to the development server and read the response',
+143 silly audit report       severity: 'moderate',
+143 silly audit report       vulnerable_versions: '<=0.24.2',
+143 silly audit report       cwe: [Array],
+143 silly audit report       cvss: [Object]
+143 silly audit report     }
+143 silly audit report   ]
+143 silly audit report }
+144 silly packumentCache corgi:https://registry.npmjs.org/esbuild cache-miss
+145 http fetch GET 200 https://registry.npmjs.org/esbuild 110ms (cache revalidated)
+146 silly packumentCache corgi:https://registry.npmjs.org/esbuild set size:866881 disposed:false
+147 silly packumentCache corgi:https://registry.npmjs.org/vite cache-miss
+148 http fetch GET 200 https://registry.npmjs.org/vite 242ms (cache updated)
+149 silly packumentCache corgi:https://registry.npmjs.org/vite set size:undefined disposed:false
+150 silly ADD
+151 silly ADD
+152 silly ADD
+153 silly ADD
+154 silly ADD
+155 silly ADD
+156 silly ADD
+157 silly ADD
+158 silly ADD
+159 silly ADD
+160 silly ADD
+161 silly ADD
+162 silly ADD
+163 silly ADD
+164 silly ADD
+165 silly ADD
+166 silly ADD
+167 silly ADD
+168 silly ADD
+169 silly ADD
+170 silly ADD
+171 silly ADD
+172 silly ADD
+173 silly ADD
+174 silly ADD
+175 silly ADD
+176 silly ADD
+177 silly ADD
+178 silly ADD
+179 silly ADD
+180 silly ADD
+181 silly ADD
+182 silly ADD
+183 silly ADD
+184 silly ADD
+185 silly ADD
+186 silly ADD
+187 silly ADD
+188 silly ADD
+189 silly ADD
+190 silly ADD
+191 silly ADD
+192 verbose cwd /data/data/com.termux/files/home/sentinel_app
+193 verbose os Linux 6.1.93-android14-11
+194 verbose node v22.18.0
+195 verbose npm  v10.9.3
+196 verbose exit 0
+197 info ok

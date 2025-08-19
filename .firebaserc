@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "sentinel-vanguard-ai-pro"
+  },
+  "targets": {
+    "sentinel-vanguard-ai-pro": {
+      "hosting": {
+        "default": [
+          "sentinel-vanguard-ai-pro"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

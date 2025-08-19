@@ -1,0 +1,39 @@
+name: Deploy to Cloudflare Pages
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Detect & Build (if package.json)
+        id: build
+        shell: bash
+        run: |
+          if [ -f package.json ] && jq -e '.scripts.build!=null' package.json >/dev/null 2>&1; then
+            echo "Building with npm…"
+            npm ci
+            npm run build
+            echo "dir=dist" >> "$GITHUB_OUTPUT"
+          else
+            echo "Static site — no build."
+            echo "dir=." >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          directory: ${{ steps.build.outputs.dir }}
+          branch: ${{ secrets.CLOUDFLARE_PAGES_BRANCH || 'main' }}
+          wranglerVersion: '3'

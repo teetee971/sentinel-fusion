@@ -1,0 +1,29 @@
+// Thème
+const THEME_KEY = "sentinelle-theme"; const root = document.documentElement[1;32m[✔][0m Écrit: main.js
+[1;32m[✔][0m Démarrage Vite (port 5173) dans tmux 'web'…
+[1;32m[✔][0m URL : http://127.0.0.1:5173/
+[1;32m[✔][0m Voir les logs : tmux attach -t web  (détache: Ctrl+B puis D)
+root.classList.contains("dark") ? "light" : "dark";
+  localStorage.setItem(THEME_KEY, next); applyTheme(next);
+});
+// Navigation
+document.querySelectorAll(".nav a").forEach(a=>{
+  a.addEventListener("click",(e)=>{
+    e.preventDefault();
+    document.querySelectorAll(".nav a").forEach(x=>x.classList.remove("active"));
+    a.classList.add("active");
+    const id = "view-"+a.dataset.view;
+    document.querySelectorAll(".view").forEach(v=>v.classList.remove("show"));
+    document.getElementById(id)?.classList.add("show");
+  });
+});
+// KPI + uptime
+let start = Date.now();
+setInterval(()=>{
+  const detections = Math.floor(Math.random()*7);
+  document.getElementById("detectionsToday").textContent = String(detections);
+  document.getElementById("filesScanned").textContent = String(1200 + Math.floor(Math.random()*800)).toLocaleString("fr-FR");
+  const s = Math.floor((Date.now()-start)/1000);
+  const h = String(Math.floor(s/3600)).padStart(2,"0");
+  const m = String(Math.floor((s%3600)/60)).padStart(2,"0");
+  const ss = String(s%60).padStart(2,"0

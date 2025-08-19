@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+ENV="$HOME/.cfpages.env"; [ -f "$ENV" ] || { echo "Env manquant: $ENV"; exit 1; }
+set -a; . "$ENV"; set +a
+API="https://api.cloudflare.com/client/v4"
+HDR=(-H "Authorization: Bearer $CF_API_TOKEN")
+
+v=$(curl -sS -o /dev/null -w "%{http_code}" "${HDR[@]}" "$API/user/tokens/verify")
+[ "$v" = 200 ] || { echo "❌ Token invalide."; exit 1; }
+
+p=$(curl -sS -o /dev/null -w "%{http_code}" "${HDR[@]}" "$API/accounts/$ACCOUNT_ID/pages/projects")
+[ "$p" = 200 ] || { echo "❌ Le token n'a pas l'accès Pages."; exit 1; }
+
+slug=$(curl -sS "${HDR[@]}" "$API/accounts/$ACCOUNT_ID/pages/projects" | jq -r '.result[].name' | grep -iE '^sentinel' | head -1)
+[ -n "$slug" ] || { echo "❌ Projet 'sentinel*' introuvable."; exit 1; }
+[ "$slug" = "$PROJECT_NAME" ] || echo "⚠️ PROJECT_NAME=$PROJECT_NAME ≠ slug réel=$slug"
+
+echo "✅ Doctor OK — token, droits Pages et projet détectés."

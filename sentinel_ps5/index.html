@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sentinel Quantum Vanguard AI Pro — PS5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="dark">
+  <header class="top container">
+    <div class="brand">
+      <svg class="badge" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#7bb6ff"/><stop offset="1" stop-color="#2d6bff"/></linearGradient></defs>
+        <path fill="none" stroke="url(#g)" stroke-width="3" d="M32 6l20 8v15c0 12-9 23-20 29C21 52 12 41 12 29V14z"/>
+        <path fill="none" stroke="#a6c8ff" stroke-width="3" d="M32 18a11 11 0 110 22 11 11 0 010-22z"/>
+        <path fill="#a6c8ff" d="M30 26h4v8h-4zM30 36h4v2h-4z"/>
+      </svg>
+      <div class="title"><strong>Sentinel</strong> Quantum Vanguard <span class="tag">AI Pro</span></div>
+    </div>
+    <nav class="nav">
+      <button id="themeBtn" class="btn ghost" title="Mode clair/sombre">🌗</button>
+      <span class="dot on"></span>
+      <span id="clock" class="muted"></span>
+    </nav>
+  </header>
+
+  <section class="hero container">
+    <div class="rings">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+      <div class="core">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="18" fill="none" stroke="#8fc0ff" stroke-width="2"/><path fill="#8fc0ff" d="M30 28h4v8h-4zM30 38h4v2h-4z"/></svg>
+      </div>
+    </div>
+    <h1>La sécurité du futur, dès aujourd’hui</h1>
+    <p class="sub">Dashboard style <b>PS5</b> — interface verre/néon bleuté.</p>
+  </section>
+
+  <main class="container layout">
+    <section>
+      <h2 class="h2">Modules actifs</h2>
+      <div class="grid modules">
+        <a class="card" href="#"><span class="ic">🧠</span><div><div class="t">Cognitive Firewall</div><div class="m">Filtrage IA adaptatif</div></div></a>
+        <a class="card" href="#"><span class="ic">🛰️</span><div><div class="t">OSINT Intelligence</div><div class="m">Veille publique & darkweb</div></div></a>
+        <a class="card" href="#"><span class="ic">🔐</span><div><div class="t">Confidentialité Renforcée</div><div class="m">Anonymisation & cloaking</div></div></a>
+        <a class="card" href="#"><span class="ic">🧩</span><div><div class="t">Pare-feu Visuel</div><div class="m">Anomalies UI/UX</div></div></a>
+        <a class="card" href="#"><span class="ic">🛠️</span><div><div class="t">Réponse Incident</div><div class="m">Playbooks auto</div></div></a>
+        <a class="card" href="#"><span class="ic">🕵️</span><div><div class="t">Détection APT / Pegasus</div><div class="m">IOC · heuristiques</div></div></a>
+        <a class="card" href="#"><span class="ic">📡</span><div><div class="t">Garde Réseau</div><div class="m">NDR + DNS Shield</div></div></a>
+        <a class="card" href="#"><span class="ic">🔄</span><div><div class="t">Mise à jour Automatique</div><div class="m">Agents vivants</div></div></a>
+        <a class="card" href="#"><span class="ic">🎯</span><div><div class="t">Quantum Protector</div><div class="m">Modèles robustes</div></div></a>
+        <a class="card" href="#"><span class="ic">🗄️</span><div><div class="t">Coffre-fort de confidentialité</div><div class="m">Secrets chiffrés</div></div></a>
+        <a class="card" href="#"><span class="ic">🎛️</span><div><div class="t">Lanceur principal sécurisé</div><div class="m">Contrôles d’accès</div></div></a>
+        <a class="card" href="#"><span class="ic">📊</span><div><div class="t">Journal IA en temps réel</div><div class="m">Télémétrie</div></div></a>
+      </div>
+
+      <div class="grid stats">
+        <article class="panel">
+          <div class="muted">Security Score</div>
+          <div class="score">
+            <svg class="donut" viewBox="0 0 120 120">
+              <circle class="track" cx="60" cy="60" r="48"/>
+              <circle class="bar"   id="scoreBar" cx="60" cy="60" r="48" pathLength="100"/>
+              <text x="60" y="66" text-anchor="middle" class="scoreNum" id="scoreNum">96</text>
+            </svg>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="muted">Statut</div>
+          <div class="big">En ligne</div>
+          <div class="hint">Agent connecté</div>
+        </article>
+      </div>
+    </section>
+
+    <aside>
+      <h2 class="h2">Actualité Cyber & Modules IA</h2>
+      <ul class="news" id="newsList"></ul>
+    </aside>
+  </main>
+
+  <footer class="container footer">
+    <div class="tagline">Protection proactive. Intelligence extrême. Résilience totale.</div>
+    <div class="dock">
+      <button class="dock-btn">🏠</button>
+      <button class="dock-btn">🔎</button>
+      <button class="dock-btn">⚠️</button>
+      <button class="dock-btn">📈</button>
+      <button class="dock-btn">👤</button>
+    </div>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
