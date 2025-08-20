@@ -1,3 +1,14 @@
-{ "name":"Sentinel Fusion", "short_name":"Sentinel",
-  "icons":[ { "src":"/favicon.svg","sizes":"128x128","type":"image/svg+xml" } ],
-  "theme_color":"#0b1020", "background_color":"#0b1020", "display":"standalone" }
+{
+  "name": "Sentinel Quantum Vanguard AI Pro",
+  "short_name": "SQV AI Pro",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "128x128",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#0b1020",
+  "background_color": "#0b1020",
+  "display": "standalone"
+}
