@@ -1,0 +1,3 @@
+Contact: mailto:you@example.com
+Preferred-Languages: fr, en
+Policy: https://sentinel-fusion.pages.dev/

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sentinel-fusion.pages.dev/sitemap.xml
