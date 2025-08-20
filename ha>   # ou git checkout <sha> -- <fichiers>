@@ -1,0 +1,17 @@
+[33m4d17c14[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m site: update
+[33m6f82c24[m Add basic styles
+[33m8e2f71a[m deploy: guard + assets
+[33m8d6a779[m ci: fix Cloudflare Pages directory -> .
+[33ma826cf9[m ci: restore workflow_dispatch + Pages deploy workflow
+[33m055f916[m deploy
+[33meed9d1e[m deploy
+[33mf20c656[m deploy
+[33m8935765[m deploy
+[33m9e8300c[m ci: restore workflow_dispatch + correct directory
+[33m57f259c[m ci: deploy sentinel_app/public
+[33m1985bf3[m deploy
+[33m032e75c[m ci: add Cloudflare Pages workflow
+[33m5973b57[m chore: ignore secrets & temp files
+[33m9f20a90[m feat: initial push (no secrets)
+[33m6fc7d70[m chore: sync deploy
+[33m632b87c[m Sentinel Fusion initial
