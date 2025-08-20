@@ -1,26 +1,14 @@
 /*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: no-referrer-when-downgrade
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
-*/
- /style.css
-  Cache-Control: public, max-age=31536000, immutable
-/*
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'
-  Referrer-Policy: no-referrer-when-downgrade
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
-/contact.html
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
-  script-src 'self' https://challenges.cloudflare.com;
-  style-src 'self' 'unsafe-inline';
-  frame-src https://challenges.cloudflare.com;
-  connect-src 'self'
-/contact.html
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
-  script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline';
-  frame-src https://challenges.cloudflare.com; connect-src 'self';
+  Referrer-Policy: no-referrer-when-downgrade
+  Permissions-Policy: camera=(), geolocation=(), microphone=()
   Cache-Control: no-store
+
+/contact.html
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
+    script-src 'self' https://challenges.cloudflare.com;
+    style-src 'self' 'unsafe-inline';
+    frame-src https://challenges.cloudflare.com;
+    connect-src 'self'
