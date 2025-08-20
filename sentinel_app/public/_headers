@@ -19,3 +19,8 @@
   style-src 'self' 'unsafe-inline';
   frame-src https://challenges.cloudflare.com;
   connect-src 'self'
+/contact.html
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:;
+  script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline';
+  frame-src https://challenges.cloudflare.com; connect-src 'self';
+  Cache-Control: no-store
