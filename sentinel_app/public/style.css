@@ -1,1 +1,14 @@
-body { background-color: #111; font-family: sans-serif; margin: 0; padding: 20px; }
+body { background-color: #111; font-family: sans-serif; margin: 0; padding: 20px; }/* == vnp:modal v1 == */
+.vnp-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(10,14,20,.6);z-index:9999}
+.vnp-modal.open{display:flex}
+.vnp-card{width:min(520px,94vw);background:rgba(255,255,255,.03);backdrop-filter:saturate(120%) blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:16px}
+.vnp-card h3{margin:.2em 0 .6em}
+.vnp-row{display:flex;gap:8px}.vnp-row>*{flex:1}
+.vnp-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.vnp-toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%) translateY(24px);opacity:0;background:rgba(16,24,32,.9);color:#fff;border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:10px;z-index:10000;transition:transform .25s,opacity .25s}
+.vnp-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.is-busy{pointer-events:none;opacity:.6}
+@media (max-width:720px){.vnp-card{padding:14px}}
+/* == vnp:fab v1 == */
+.vnp-fab{position:fixed;right:16px;bottom:16px;z-index:9998;display:none}
+.has-vnp .vnp-fab{display:block}
