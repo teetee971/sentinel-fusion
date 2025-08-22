@@ -593,3 +593,58 @@ cat >> "$JS" <<'JS'
     form.addEventListener('submit', ()=>{ btn&&btn.classList.add('is-busy'); setTimeout(()=>btn&&btn.classList.remove('is-busy'), 6000); });
   }
 })();
+/* == vpn: ui v1 == */
+(()=>{
+
+async function api(p, opt={}){
+  const r = await fetch(`/api/vpn/${p}`, { headers:{'Accept':'application/json'}, ...opt });
+  if(!r.ok) throw new Error(`API ${p}: ${r.status}`);
+  return await r.json();
+}
+
+function el(tag, attrs={}, ...kids){
+  const e=document.createElement(tag);
+  Object.entries(attrs).forEach(([k,v])=> (k in e)?(e[k]=v):e.setAttribute(k,v));
+  kids.forEach(k=> e.append(k));
+  return e;
+}
+
+async function render(){
+  let pane=document.querySelector('.vpn-pane');
+  if(!pane){ pane=el('div',{className:'vpn-pane'}); document.body.appendChild(pane); }
+  pane.innerHTML='Statut…';
+  try{
+    const status = await api('status');      // { up:true, version:'...', iface:'wg0', ... }
+    const peers  = await api('peers');       // [{id:'abc', name:'Laptop', online:true, rx:..., tx:...}, ...]
+    const head   = el('div',{}, 
+      el('h4',{},'VPN — statut'),
+      el('div',{}, JSON.stringify(status))
+    );
+    const list = el('div',{className:'vpn-list'});
+    (Array.isArray(peers)?peers:[]).forEach(p=>{
+      const row = el('div',{className:'vpn-item'},
+        el('div',{}, el('strong',{}, p.name||p.id), el('br'), el('small',{}, p.online?'en ligne':'hors ligne')),
+        el('div',{}, el('button',{onclick:async ()=>{
+          try{
+            await api(`peers/${encodeURIComponent(p.id)}/enable`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({enable: !p.enabled})});
+            location.reload();
+          }catch(e){ (window.bad||alert)(e.message); }
+        }}, (p.enabled===false?'Activer':'Désactiver')))
+      );
+      list.appendChild(row);
+    });
+    pane.replaceChildren(head, list);
+  }catch(e){
+    pane.textContent = `Erreur API: ${e.message}`;
+  }
+}
+
+function ensureUI(){
+  if(document.querySelector('.vpn-chip')) return;
+  const chip = el('button',{className:'vpn-chip', title:'VPN'}, 'VPN');
+  chip.addEventListener('click', render);
+  document.body.appendChild(chip);
+}
+ensureUI();
+
+})();
