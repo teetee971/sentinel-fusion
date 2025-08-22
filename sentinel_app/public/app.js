@@ -513,3 +513,20 @@ cat >> "$JS" <<'JS'
   apply(); mq.addEventListener('change',apply);
 })();
 })();
+/* == addons:a11y-perf-print v1 == */
+(()=>{"use strict";
+/* aria-current sur l’onglet actif (meilleure a11y) */
+(function(){
+  const page=(document.body.getAttribute('data-page')||location.pathname.replace(/\.html$/,'').replace(/\/$/,'/'))||'/';
+  const norm=(s)=> (s||'').replace(/\.html$/,'').replace(/\/$/,'/');
+  document.querySelectorAll('nav.sub a').forEach(a=>{
+    const href=norm(a.getAttribute('href'));
+    if(!href) return;
+    if(page==='/' ? (href==='/'||/\/index$/.test(href)) : page.startsWith(href)){
+      a.setAttribute('aria-current','page');
+    } else {
+      a.removeAttribute('aria-current');
+    }
+  });
+})();
+})();
