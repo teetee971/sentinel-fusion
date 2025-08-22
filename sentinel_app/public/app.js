@@ -206,3 +206,48 @@ document.getElementById('init').addEventListener('click', async () => {
 
   h.insertAdjacentElement('afterend', box);
 })();
+// === ux:mobile-pack v1 ===
+
+// Sommaire depuis les <h2 id="...">
+(function(){
+  const hs=[...document.querySelectorAll('h2[id]')];
+  if(!hs.length) return;
+  const toc=document.createElement('nav'); toc.className='toc';
+  hs.forEach(h=>{const a=document.createElement('a'); a.href='#'+h.id; a.textContent=h.textContent.trim(); toc.appendChild(a);});
+  document.body.insertBefore(toc, document.body.firstChild);
+})();
+
+// Sections .card repliables (mobile)
+(function(){
+  if(!matchMedia('(max-width:720px)').matches) return;
+  document.querySelectorAll('.card h3').forEach(h3=>{
+    const btn=document.createElement('button'); btn.className='card-toggle'; btn.innerHTML=h3.innerHTML;
+    const wrap=document.createElement('div'); wrap.className='card-content';
+    while(h3.nextSibling) wrap.appendChild(h3.nextSibling);
+    h3.replaceWith(btn); btn.after(wrap);
+    btn.addEventListener('click',()=>wrap.classList.toggle('open'));
+  });
+})();
+
+// Table -> cartes : data-labels depuis THEAD
+(function(){
+  const t=document.querySelector('table.compare'); if(!t) return;
+  const heads=[...t.querySelectorAll('thead th')].map(th=>th.textContent.trim());
+  t.querySelectorAll('tbody tr').forEach(tr=>{
+    [...tr.children].forEach((td,i)=>td.setAttribute('data-label', heads[i]||''));
+  });
+})();
+
+// CTA flottant (duplique le bouton contact/démo)
+(function(){
+  if(!matchMedia('(max-width:720px)').matches) return;
+  const src=document.querySelector('.hero .btn')||
+             document.querySelector('a.btn[href*="contact"]')||
+             document.querySelector('a[href*="#contact"]');
+  if(!src) return;
+  const wrap=document.createElement('div'); wrap.className='cta-fab';
+  wrap.appendChild(src.cloneNode(true));
+  document.body.appendChild(wrap);
+})();
+
+// === /ux:mobile-pack v1 ===
