@@ -153,3 +153,20 @@ document.getElementById('init').addEventListener('click', async () => {
     mq.addEventListener('change',()=> set(!mq.matches));
   });
 })();
+// ux(toc): build a chip bar from page <h2 id="...">
+(function(){
+  const hs=[...document.querySelectorAll('h2[id]')];
+  if(hs.length<2) return;
+  const toc=document.createElement('nav'); toc.className='toc';
+  hs.forEach(h=>{ const a=document.createElement('a'); a.href='#'+h.id; a.textContent=h.textContent.trim(); toc.appendChild(a); });
+  const firstSection=document.querySelector('.section') || document.body.firstChild;
+  document.body.insertBefore(toc, firstSection);
+})();
+// ux(CTA mobile): float primary hero button
+(function(){
+  if(!matchMedia('(max-width:720px)').matches) return;
+  const btn=document.querySelector('.hero .btn') || document.querySelector('a.btn[href*="contact"], a.btn[href*="#contact"]');
+  if(!btn) return;
+  btn.classList.add('cta-fab');
+  document.body.classList.add('has-cta');
+})();
