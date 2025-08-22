@@ -88,3 +88,43 @@ document.getElementById('init').addEventListener('click', async () => {
     }
   }
 })();
+// >>> nav-glide v1 >>>
+(function(){
+  const nav=document.querySelector('nav.sub');
+  if(!nav) return;
+  let ind=nav.querySelector('.indicator');
+  if(!ind){ ind=document.createElement('i'); ind.className='indicator'; nav.appendChild(ind); }
+  nav.setAttribute('data-glide','');
+
+  const links=[...nav.querySelectorAll('a')];
+
+  function moveTo(el){
+    if(!el) return;
+    const nr=nav.getBoundingClientRect();
+    const r=el.getBoundingClientRect();
+    nav.style.setProperty('--ind-x', (r.left - nr.left)+'px');
+    nav.style.setProperty('--ind-w', r.width+'px');
+  }
+
+  function currentLink(){
+    const page=(document.body.getAttribute('data-page')||location.pathname)
+      .replace(/\/index\.html$/,'/');
+    return links.find(a=>{
+      const href=(a.getAttribute('href')||'').replace(/\.html$/,'');
+      if(page==='/' && (href==='/'||/index$/.test(href))) return true;
+      return href && page && href.startsWith(page);
+    }) || links[0];
+  }
+
+  let active=currentLink();
+  moveTo(active);
+
+  links.forEach(a=>{
+    a.addEventListener('mouseenter', ()=>moveTo(a));
+    a.addEventListener('focus',      ()=>moveTo(a));
+    a.addEventListener('click',      ()=>{ active=a; });
+  });
+  nav.addEventListener('mouseleave', ()=>moveTo(active));
+  window.addEventListener('resize',  ()=>moveTo(active));
+})();
+// <<< nav-glide v1 <<<
