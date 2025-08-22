@@ -530,3 +530,49 @@ cat >> "$JS" <<'JS'
   });
 })();
 })();
+/* == contact-pack v1 == */
+(function(){
+  const form=document.querySelector('#contact-form'); if(!form) return;
+  const msg=form.querySelector('.msg');
+  const ok=t=>{ msg.textContent=t; msg.style.opacity=.95; };
+  const bad=t=>{ msg.textContent=t; msg.style.opacity=.95; };
+  const endpoint=(window.CONTACT_ENDPOINT||'').trim();
+
+  const emailRx=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(form);
+    if(fd.get('website')){ ok('Merci !'); form.reset(); return; } // honeypot
+    const payload={
+      name:(fd.get('name')||'').toString().trim(),
+      company:(fd.get('company')||'').toString().trim(),
+      email:(fd.get('email')||'').toString().trim(),
+      phone:(fd.get('phone')||'').toString().trim(),
+      message:(fd.get('message')||'').toString().trim(),
+      page: location.href,
+      t: new Date().toISOString()
+    };
+    if(!payload.name || !emailRx.test(payload.email) || payload.message.length<5){
+      bad('Vérifiez les champs requis.'); return;
+    }
+    const last=+localStorage.getItem('sqv_contact_last')||0;
+    if(Date.now()-last < 60000){ bad('Trop de demandes. Réessayez dans une minute.'); return; }
+    localStorage.setItem('sqv_contact_last', Date.now());
+
+    ok('Envoi en cours…');
+    if(!endpoint){
+      console.info('[Contact DEMO]', payload);
+      ok('Merci ! Votre demande est enregistrée (mode démo).');
+      form.reset();
+      return;
+    }
+    try{
+      const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(r.ok){ ok('Merci ! Nous revenons vers vous rapidement.'); form.reset(); }
+      else{ bad('Envoi impossible. Essayez encore ou contactez-nous directement.'); }
+    }catch(err){
+      bad('Réseau indisponible. Réessayez.');
+    }
+  });
+})();
