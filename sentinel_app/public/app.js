@@ -576,3 +576,20 @@ cat >> "$JS" <<'JS'
     }
   });
 })();
+/* == contact: toast v1 == */
+(()=>{ 
+  function toast(msg, kind='ok'){
+    let t=document.querySelector('.toast');
+    if(!t){ t=document.createElement('div'); t.className='toast'; document.body.appendChild(t); }
+    t.className='toast show ' + (kind==='bad'?'bad':'ok');
+    t.textContent=msg;
+    clearTimeout(window.__toastT); window.__toastT=setTimeout(()=>t.classList.remove('show'), 4000);
+  }
+  window.ok  = window.ok  || ((m)=>toast(m,'ok'));
+  window.bad = window.bad || ((m)=>toast(m,'bad'));
+  const form=document.querySelector('form[action="#contact"], form#contact, .contact form');
+  if(form){
+    const btn=form.querySelector('button[type="submit"], [type="submit"]');
+    form.addEventListener('submit', ()=>{ btn&&btn.classList.add('is-busy'); setTimeout(()=>btn&&btn.classList.remove('is-busy'), 6000); });
+  }
+})();
