@@ -170,3 +170,39 @@ document.getElementById('init').addEventListener('click', async () => {
   btn.classList.add('cta-fab');
   document.body.classList.add('has-cta');
 })();
+// ux(podiums->chips): transforme les paragraphes "🥇/🥈/🥉 ..." en chips compactes
+(function(){
+  const h=[...document.querySelectorAll('h2,h3')]
+    .find(n=>/Podiums?\s+par\s+usage/i.test(n.textContent));
+  if(!h) return;
+
+  // Récupère tous les paragraphes/puces jusqu'au prochain H2/H3
+  const nodes=[]; let el=h.nextElementSibling;
+  while(el && !/^H[23]$/.test(el.tagName)){ if(el.matches('p,li')) nodes.push(el); el=el.nextElementSibling; }
+
+  if(!nodes.length) return;
+  const box=document.createElement('div');
+
+  nodes.forEach(n=>{
+    const txt=n.textContent.trim(); const split=txt.split(':');
+    if(split.length<2) return;
+    const title=split.shift().trim();
+    const wrap=document.createElement('div'); wrap.className='podium';
+    wrap.innerHTML=`<div class="podium-title">${title}</div><div class="chips"></div>`;
+    const target=wrap.querySelector('.chips');
+
+    split.join(':').split(/•|,|\u00B7/).map(s=>s.trim()).filter(Boolean).forEach(item=>{
+      const medal=(item.match(/(🥇|🥈|🥉)/)||[])[1]||'';
+      const label=item.replace(/(🥇|🥈|🥉)/g,'').trim().replace(/^[-–•]+/,'');
+      const chip=document.createElement('span'); chip.className='chip';
+      if(medal){ const i=document.createElement('span'); i.className='chip-medal'; i.textContent=medal; chip.appendChild(i); }
+      const l=document.createElement('span'); l.className='label'; l.textContent=label; chip.appendChild(l);
+      target.appendChild(chip);
+    });
+
+    box.appendChild(wrap);
+    n.remove(); // remplace le paragraphe par le bloc chips
+  });
+
+  h.insertAdjacentElement('afterend', box);
+})();
