@@ -251,3 +251,100 @@ document.getElementById('init').addEventListener('click', async () => {
 })();
 
 // === /ux:mobile-pack v1 ===
+// === ux:all-pack v1 ===
+
+// H2 -> id (slug) si absent
+(function(){
+  document.querySelectorAll('h2:not([id])').forEach(h=>{
+    let s=h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+    if(!s) s='h2-'+Math.random().toString(36).slice(2,7);
+    if(!document.getElementById(s)) h.id=s;
+  });
+})();
+
+// Sommaire auto (mobile)
+(function(){
+  const hs=[...document.querySelectorAll('h2[id]')]; if(!hs.length) return;
+  const toc=document.createElement('nav'); toc.className='toc';
+  hs.forEach(h=>{const a=document.createElement('a'); a.href='#'+h.id; a.textContent=h.textContent.trim(); toc.appendChild(a);});
+  document.body.insertBefore(toc, document.body.firstChild);
+})();
+
+// Nav glide v2 (barre animée + actif)
+(function(){
+  const nav=document.querySelector('nav.sub'); if(!nav) return;
+  let ind=nav.querySelector('.indicator'); if(!ind){ind=document.createElement('i');ind.className='indicator';nav.appendChild(ind);}
+  const links=[...nav.querySelectorAll('a')];
+  function current(){
+    const page=(document.body.getAttribute('data-page')||location.pathname.replace(/\.html$/,'')||'/');
+    return links.find(a=>{
+      const h=(a.getAttribute('href')||'').replace(/\.html$/,'');
+      if(page==='/' && (/^\/$|\/index$/.test(h))) return true;
+      return h && (page===h || page.startsWith(h));
+    })||links[0];
+  }
+  function moveTo(a){
+    if(!a) return;
+    const r=a.getBoundingClientRect(), nr=nav.getBoundingClientRect();
+    nav.style.setProperty('--ind-x',(r.left-nr.left)+'px');
+    nav.style.setProperty('--ind-w',r.width+'px');
+  }
+  let active=current(); moveTo(active);
+  links.forEach(a=>{['mouseenter','focus'].forEach(e=>a.addEventListener(e,()=>moveTo(a)));
+                    a.addEventListener('click',()=>{active=a;});});
+  nav.addEventListener('mouseleave',()=>moveTo(active));
+  window.addEventListener('resize',()=>moveTo(active));
+})();
+
+// Sections .card repliables (mobile)
+(function(){
+  if(!matchMedia('(max-width:720px)').matches) return;
+  document.querySelectorAll('.card h3').forEach(h3=>{
+    const btn=document.createElement('button'); btn.className='card-toggle'; btn.innerHTML=h3.innerHTML;
+    const wrap=document.createElement('div'); wrap.className='card-content';
+    while(h3.nextSibling) wrap.appendChild(h3.nextSibling);
+    h3.replaceWith(btn); btn.after(wrap);
+    btn.addEventListener('click',()=>wrap.classList.toggle('open'));
+  });
+})();
+
+// Tableau -> data-label + tri simple
+(function(){
+  const t=document.querySelector('table.compare'); if(!t) return;
+  // data-label depuis THEAD
+  const heads=[...t.querySelectorAll('thead th')].map(th=>th.textContent.trim());
+  t.querySelectorAll('tbody tr').forEach(tr=>{
+    [...tr.children].forEach((td,i)=>td.setAttribute('data-label', heads[i]||''));
+  });
+  // tri (desktop)
+  t.classList.add('sortable');
+  const ths=[...t.querySelectorAll('thead th')];
+  ths.forEach((th,idx)=>{
+    th.title='Trier';
+    th.addEventListener('click',()=>{
+      const dir=th.dataset.sort==='asc'?'desc':'asc';
+      ths.forEach(x=>x.removeAttribute('data-sort')); th.dataset.sort=dir;
+      const rows=[...t.tBodies[0].rows];
+      rows.sort((a,b)=>{
+        const ax=a.cells[idx].textContent.trim().toLowerCase();
+        const bx=b.cells[idx].textContent.trim().toLowerCase();
+        if(ax===bx) return 0; return (ax>bx?1:-1)*(dir==='asc'?1:-1);
+      });
+      rows.forEach(r=>t.tBodies[0].appendChild(r));
+    });
+  });
+})();
+
+// CTA flottant (duplique “Contact & démo” si dispo)
+(function(){
+  if(!matchMedia('(max-width:720px)').matches) return;
+  const src=document.querySelector('.hero .btn')||
+             document.querySelector('a.btn[href*="contact"]')||
+             document.querySelector('a[href*="#contact"]');
+  if(!src) return;
+  const wrap=document.createElement('div'); wrap.className='cta-fab';
+  wrap.appendChild(src.cloneNode(true)); document.body.appendChild(wrap);
+  document.body.classList.add('has-cta');
+})();
+
+// === /ux:all-pack v1 ===
