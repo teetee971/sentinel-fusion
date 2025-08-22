@@ -648,3 +648,63 @@ function ensureUI(){
 ensureUI();
 
 })();
+/* == vnp:ui v1 == */
+(function(){
+  const EP = window.VNP_ENDPOINT||'';
+  const KEY = window.VNP_KEY||'';
+  function vnpToast(msg){
+    let t=document.querySelector('.vnp-toast'); if(!t){ t=document.createElement('div'); t.className='vnp-toast'; document.body.appendChild(t); }
+    t.textContent=msg; t.classList.add('show'); clearTimeout(window.__vnp_to); window.__vnp_to=setTimeout(()=>t.classList.remove('show'), 2200);
+  }
+  function ensureModal(){
+    let m=document.querySelector('.vnp-modal'); if(m) return m;
+    m=document.createElement('div'); m.className='vnp-modal';
+    m.innerHTML='<div class="vnp-card"><h3>Bouclier mobile — activation</h3>'
+    +'<form class="vnp-form" novalidate>'
+    +'<input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />'
+    +'<label>Téléphone<br><input type="tel" name="phone" required placeholder="+33…"></label>'
+    +'<label>Plateforme<br><select name="platform"><option>Android</option><option>iOS</option></select></label>'
+    +'<label>E-mail (optionnel)<br><input type="email" name="email" placeholder="vous@example.fr"></label>'
+    +'<label>Message (optionnel)<br><textarea name="message" rows="3" placeholder="Contexte, besoins…"></textarea></label>'
+    +'<div class="vnp-actions"><button type="button" data-cancel>Fermer</button><button type="submit" class="btn">Activer</button></div>'
+    +'</form></div>';
+    document.body.appendChild(m);
+    m.addEventListener('click', e=>{ if(e.target===m) m.classList.remove('open'); });
+    m.querySelector('[data-cancel]').addEventListener('click', ()=>m.classList.remove('open'));
+    const form=m.querySelector('form');
+    form.addEventListener('submit', async (ev)=>{
+      ev.preventDefault();
+      if(!EP){ vnpToast("Endpoint VNP manquant"); return; }
+      const fd = new FormData(form);
+      if((fd.get('phone')||'').toString().trim().length<5){ vnpToast("Téléphone invalide"); return; }
+      const payload = {
+        phone:(fd.get('phone')||'').toString().trim(),
+        platform:(fd.get('platform')||'').toString(),
+        email:(fd.get('email')||'').toString().trim(),
+        message:(fd.get('message')||'').toString().trim(),
+        page:location.href,
+        t:new Date().toISOString()
+      };
+      const btn=form.querySelector('[type="submit"]'); btn.classList.add('is-busy');
+      try{
+        const headers={'Content-Type':'application/json','Accept':'application/json'};
+        if(KEY) headers['X-Formspree-Key']=KEY;
+        const r=await fetch(EP,{method:'POST',headers,body:JSON.stringify(payload)});
+        if(r.ok){ vnpToast('Demande envoyée'); form.reset(); m.classList.remove('open'); }
+        else { vnpToast('Échec envoi'); }
+      }catch(e){ vnpToast('Réseau indisponible'); }
+      btn.classList.remove('is-busy');
+    });
+    return m;
+  }
+  function open(){ ensureModal().classList.add('open'); }
+  document.querySelectorAll('a[href="#vnp"],[data-vnp],.js-vnp-open').forEach(el=>{
+    el.addEventListener('click', e=>{ e.preventDefault(); open(); });
+  });
+  if(matchMedia('(max-width:720px)').matches){
+    const fab=document.createElement('div'); fab.className='vnp-fab';
+    const a=document.createElement('a'); a.href='#vnp'; a.className='btn'; a.textContent='Activer le bouclier';
+    fab.appendChild(a); document.body.appendChild(fab); document.body.classList.add('has-vnp');
+    a.addEventListener('click', e=>{ e.preventDefault(); open(); });
+  }
+})();
