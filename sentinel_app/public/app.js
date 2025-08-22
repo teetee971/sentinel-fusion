@@ -348,3 +348,57 @@ document.getElementById('init').addEventListener('click', async () => {
 })();
 
 // === /ux:all-pack v1 ===
+/* == final:js v1 == */
+(()=>{"use strict";
+
+/* Table compare -> injecte data-label pour reflow mobile */
+(function(){
+  const t=document.querySelector('table.compare'); if(!t) return;
+  const heads=[...t.querySelectorAll('thead th')].map(th=>th.textContent.trim());
+  [...t.querySelectorAll('tbody tr')].forEach(tr=>{
+    [...tr.children].forEach((td,i)=>td.setAttribute('data-label', heads[i]||''));
+  });
+})();
+
+/* Tri simple au clic sur <th> (desktop) */
+(function(){
+  const t=document.querySelector('table.compare'); if(!t) return;
+  const ths=t.querySelectorAll('thead th'); if(!ths.length) return;
+  ths.forEach((th,idx)=>{
+    th.title='Trier';
+    th.addEventListener('click',()=>{
+      const dir=th.dataset.sort==='asc'?'desc':'asc';
+      ths.forEach(x=>x.removeAttribute('data-sort')); th.dataset.sort=dir;
+      const rows=[...t.tBodies[0].rows];
+      const ax=(a,b)=> {
+        const aa=a.cells[idx].textContent.trim().toLowerCase();
+        const bb=b.cells[idx].textContent.trim().toLowerCase();
+        if(aa===bb) return 0; return (aa>bb?1:-1)*(dir==='asc'?1:-1);
+      };
+      rows.sort(ax).forEach(r=>t.tBodies[0].appendChild(r));
+    });
+  });
+})();
+
+/* CTA flottant ("Contact & démo") si présent et viewport mobile */
+(function(){
+  if(!matchMedia('(max-width:720px)').matches) return;
+  const src=document.querySelector('.hero .btn')||
+             document.querySelector('a.btn[href*="contact"]')||
+             document.querySelector('a[href*="#contact"]');
+  if(!src) return;
+  const wrap=document.createElement('div'); wrap.className='cta-fab';
+  wrap.appendChild(src.cloneNode(true)); document.body.appendChild(wrap);
+  document.body.classList.add('has-cta');
+})();
+
+/* Perf & a11y : lazyload images, sécurise les liens externes */
+(function(){
+  document.querySelectorAll('img:not([loading])').forEach(img=>{
+    img.loading='lazy'; img.decoding='async';
+  });
+  document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+    if(!a.rel) a.rel='noopener noreferrer';
+  });
+})();
+})();
