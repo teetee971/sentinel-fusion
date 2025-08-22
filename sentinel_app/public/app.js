@@ -128,3 +128,28 @@ document.getElementById('init').addEventListener('click', async () => {
   window.addEventListener('resize',  ()=>moveTo(active));
 })();
 // <<< nav-glide v1 <<<
+// ux(table): inject data-labels for stacked cards on mobile
+(function(){
+  document.querySelectorAll('table.compare').forEach(tbl=>{
+    const heads=[...tbl.querySelectorAll('thead th')].map(th=>th.textContent.trim());
+    tbl.querySelectorAll('tbody tr').forEach(tr=>{
+      [...tr.children].forEach((td,i)=> td.setAttribute('data-label', heads[i]||''));
+    });
+  });
+})();
+// ux(card): make .card collapsible (mobile closed by default)
+(function(){
+  const mq = window.matchMedia('(max-width:720px)');
+  document.querySelectorAll('.card').forEach(card=>{
+    const h3 = card.querySelector('h3'); if(!h3) return;
+    const btn=document.createElement('button'); btn.className='card-toggle'; btn.innerHTML=h3.innerHTML;
+    h3.replaceWith(btn);
+    const content=document.createElement('div'); content.className='card-content';
+    while(btn.nextSibling){ content.appendChild(btn.nextSibling); }
+    card.appendChild(content);
+    const set = open => { content.style.display=open?'block':'none'; card.classList.toggle('is-open',open); };
+    set(!mq.matches);                            // desktop: open, mobile: closed
+    btn.addEventListener('click',()=> set(!card.classList.contains('is-open')));
+    mq.addEventListener('change',()=> set(!mq.matches));
+  });
+})();
